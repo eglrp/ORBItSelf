@@ -8,15 +8,19 @@ project (orb_itself)
 # 并将名称保存到 DIR_SRCS 变量
 aux_source_directory(./src LIB_SRCS)
 aux_source_directory(./testUtil EXE_SRCS)
+include_directories( ./include)
 # 指定生成目标
-add_executable(testUtil ${EXE_SRCS})
-add_library(ortItself SHARED ${LIB_SRCS})
+# add_executable(testUtil ${EXE_SRCS})
+# add_library(ortItself SHARED ${LIB_SRCS})
 
-SET_TARGET_PROPERTIES(ortItself PROPERTIES LINKER_LANGUAGE CXX)
-SET_TARGET_PROPERTIES(testUtil PROPERTIES LINKER_LANGUAGE CXX)
+add_executable(testUtil ${EXE_SRCS} ${LIB_SRCS})
+
+# SET_TARGET_PROPERTIES(ortItself PROPERTIES LINKER_LANGUAGE CXX)
+# SET_TARGET_PROPERTIES(testUtil PROPERTIES LINKER_LANGUAGE CXX)
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 #include_directories( ./inc/TinyVLib )
-include_directories( ./include)
+
 # target_link_libraries( stitchImgs ${OpenCV_LIBS} )
-target_link_libraries( testUtil ${OpenCV_LIBS} ortItself)
+# target_link_libraries( testUtil ${OpenCV_LIBS} ortItself)
+target_link_libraries(testUtil ${OpenCV_LIBS})
